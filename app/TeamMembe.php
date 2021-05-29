@@ -10,12 +10,9 @@ class TeamMembe extends Model
 {
    public function insert(Request $request)
    {
-    //  $avatar = $request->file('pimage')->store('avatars');
 
     $filename = time() . '.' . $request->pimage->extension();
-    
-    // print_r($filename);
-    // exit;
+
     $request->pimage->move(public_path('pimage'),$filename);
      
        $name=$request->name;
@@ -35,21 +32,27 @@ class TeamMembe extends Model
       ]);   
       
    }
-   public function updateRecord(Request $request)
+   public function updateProject(Request $request)
    {
-    $name=$request->name;
-    $dob=$request->dob;
-    $gender=$request->gender;
-    $phone=$request->phone;
-    $email=$request->email;
-     
-      $projectid=DB::table('tbl_teammember')->insert([
-        'name'=>$name,
-        'dob'=>$dob,
-        'gender'=>$gender,
-        'phone'=>$phone,
-        'email'=>$email,
-        'created_by'=>Auth::user()->id,
+
+      // $filename = time() . '.' . $request->pimage->extension();
+      // $request->pimage->move(public_path('pimage'),$filename);
+
+      $name=$request->name;
+      $dob=$request->dob;
+      $gender=$request->gender;
+      $phone=$request->phone;
+      $email=$request->email;
+      $id=$request->id;
+    
+      $clientid=DB::table('tbl_client')->where('id',$id)->update([
+         'name'=>$name,
+         'dob'=>$dob,
+         'gender'=>$gender,
+         'phone'=>$phone,
+         'email'=>$email,
+         'img'=> $filename,
+         'created_by'=>Auth::user()->id,
       ]);
    }
     public function getTeamMembeData()

@@ -64,9 +64,10 @@ Route::group(['prefix' => 'Team-Member'], function () {
     Route::get('/', 'TeamMemberController@index');
     Route::get('/add', 'TeamMemberController@add');
     Route::post('/create','TeamMemberController@insert');
-    Route::get('/addmodule/{id}','TeamMemberController@addmodule');
-    Route::post('/addtask','TeamMemberController@addtask');
-    Route::get('/deleteProject/{id}', 'ProjectListController@deleteProject');
+    // Route::get('/addmodule/{id}','TeamMemberController@addmodule');
+    // Route::post('/addtask','TeamMemberController@addtask');
+    Route::get('/deleteProject/{id}', 'TeamMemberController@delete');
+    Route::get('/add/{id}','TeamMemberController@add');
 });
 
 Route::get('/projecttodo','projecttodoController@index')->name('projecttodo');

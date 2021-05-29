@@ -21,18 +21,24 @@ class TeamMemberController extends Controller
       
         return view('TeamMember.index',['TeamMembe'=>$TeamMembe]);
     }
-    public function add()
+    public function add(Request $request)
     {
-       
-            return view('TeamMember/add');
-     
+        $id=$request->id;
+        $data='';
+        if($id!='')
+        {
+            $data=DB::table('tbl_teammember')->where('isdelete',0)->where('id',$id)->get()->first();
+        }
+        return view('TeamMember.add',['data'=>$data,'id'=>$id]);
+        // return view('TeamMember/add');
     }
     public function insert(Request $request)
     {
       
-        $id=$request->id;
+       $id=$request->id;
         if($id!='')
         {
+           
             $this->TeamMembe->updateProject($request);
         }
         else{
@@ -42,5 +48,10 @@ class TeamMemberController extends Controller
        return redirect('Team-Member/');
     }
     
+    public function delete($id)
+    {
+        DB::table('tbl_teammember')->where('id', $id)->update(['isdelete' => "1"]);
+        return redirect()->back();
+    }
  
 }
