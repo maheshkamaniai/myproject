@@ -59,7 +59,8 @@ class TaskboardController extends Controller
     {
         if(Auth::user()->name !='' &&Auth::user()->name != NULL){
             $moduledata=$this->Taskboard->getModuleData();
-            return view('Taskboard/module',['id'=>$id,'moduledata'=>$moduledata]);
+            $taskdata=$this->Taskboard->getTasklist($id);
+            return view('Taskboard/module',['id'=>$id,'moduledata'=>$moduledata,'taskdata'=>$taskdata]);
         }
         else{
             return redirect('/login');
@@ -69,17 +70,12 @@ class TaskboardController extends Controller
     public function addtask(Request $request)
     {
        
-        $taskid=$request->id;
+        $id=$request->pid;
         // print_r($taskid);
         // exit;
-        if($taskid!=''){
-            $this->taskid->updateRecord($request);
-            $message='Project List updated Successfully';
-        }
-        else{
             $taskid=$this->Taskboard->inserttask($request);
             $message='Project List Added Successfully';
-        }
-        return redirect('Taskboard/addmodule/'.$taskid)->with($message);
+        
+        return redirect('Taskboard/addmodule/'.$id)->with($message);
     }
 }

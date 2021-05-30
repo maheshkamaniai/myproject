@@ -65,14 +65,24 @@ class Taskboard extends Model
       $moduledata=DB::table('tbl_module')->where('isdelete',0)->get();
       return $moduledata;
     }
+    public function getTasklist($id)
+    {
+       $taskdata=DB::table('tbl_tasklist')->where('pid',$id)->get();
+       return $taskdata;
+    }
 
     public function inserttask(Request $request)
    {
       // exit;
       $task=$request->task;
+      $pid=$request->pid;
+      $mid=$request->mid;
+
       $taskid=DB::table('tbl_tasklist')->insertGetId([
          'task'=>$task,
          'module'=>Auth::user()->id,
+         'pid'=>$pid,
+         'mid'=>$mid
       ]);   
       // echo $taskid;exit;
        return $taskid;
@@ -80,7 +90,6 @@ class Taskboard extends Model
    public function gettaskData()
    {
      $taskData=DB::table('tbl_tasklist')->get();
-   
      return $taskData;
    }
 

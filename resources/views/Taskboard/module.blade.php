@@ -25,35 +25,33 @@
                                                 class="fa fa-chevron-up"></i></a>
                                     </div>
                                 </div>
+                                
                                 <div class="card-bodybg">
+                                <?php foreach($taskdata as $data) { 
+                                    if($data->mid==$post->id){?>
                                     <div class="row">
                                         <div class="col-12">
                                             <a href="{{ URL('Taskboard/addmodule/' . $id) }}">
                                                 <div class="col-12 py-1 shadow-sm p-2 mb-2 bg-white rounded">
-                                                    <strong>Parches</strong><br>
+                                                    <strong><?=$data->task?></strong><br>
                                                     <span class="badge-text js-checkitems-badge-text">2/15</span>
                                             </a>
-                                            <span class="badge-text js-checkitems-badge-text pull-right"> <i
-                                                    class="fa fa-paperclip" aria-hidden="true"></i>2</span>
+                                            <button class='btn btn-info btn-xs pull-right'><i class='fa fa-check'></i></button>
                                         </div>
                                     </div>
                                 </div>
+                                <?php } }?>
                                 <form method='post' action="{{ URL('Taskboard/addtask/') }}" id='ntdformhide' class="hide">
                                     {{ csrf_field() }}
                                     <div class='form-group'>
                                         <input type="text" class="form-control" name="task" value="">
-                                        <input type="hidden" class="form-control" name="mid" value="<?=$id?>">
-                                
+                                        <input type="hidden" class="form-control" name="pid" value="<?=$id?>">
+                                        <input type="hidden" class="form-control" name="mid" value="<?=$post->id?>">
                                         <button type="submit" value="submit" class="btn btn-primary mt-1 ml-0">Add</button>
                                     </div>
                                 </form>
                             </div>
-                            <div class="card-footer" id='ntdfooterhide'>
-                                <a class="open-card-composer js-open-card-composer" href="javascript:void(0)">
-                                    <!-- <span class="icon-sm icon-add"></span> -->
-                                    <span class="js-add-a-card">Add a card</span>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
                     <?php } ?>
