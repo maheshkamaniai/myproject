@@ -35,8 +35,9 @@ Route::group(['prefix' => 'Client'], function () {
     Route::get('/destroy/{id}', 'ClientController@destroy');
 });
 
-Route::group(['prefix'=>'Project-List'],function(){
+    Route::group(['prefix'=>'Project-List'],function(){
     Route::get('/ongoing','ProjectListController@index1')->middleware('viewProjectlist');
+    Route::get('/summary/{id}','ProjectListController@summary');
     Route::get('/upcomming','ProjectListController@index2')->middleware('viewProjectlist');
     Route::get('/add','ProjectListController@add')->middleware('addProjectlist');
     Route::get('/add/{id}','ProjectListController@add')->middleware('addProjectlist');

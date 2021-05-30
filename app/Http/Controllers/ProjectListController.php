@@ -107,11 +107,11 @@ class ProjectListController extends Controller
     public function deleteProject($id)
     {
         
-     DB::table('tbl_project')
-     ->where('id', $id)
-     ->update(['isdelete' => "1"]);
+        DB::table('tbl_project')
+        ->where('id', $id)
+        ->update(['isdelete' => "1"]);
 
- return redirect()->back();
+        return redirect()->back();
     }
     public function deleteModule($id)
     {
@@ -119,7 +119,7 @@ class ProjectListController extends Controller
         ->where('id', $id)
         ->update(['isdelete' => "1"]);
    
-    return redirect()->back();
+        return redirect()->back();
     }
     public function deleteTask($id)
     {
@@ -127,73 +127,15 @@ class ProjectListController extends Controller
         ->where('id', $id)
         ->update(['isdelete' => "1"]);
    
-    return redirect()->back();
+        return redirect()->back();
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function summary($id)
     {
-        //
+        $projectmodule=DB::table('tbl_project_module')->where('isdelete',0)->where('project_id',$id)->get();
+        $taskdata=DB::table('tbl_project_task')->where('isdelete',0)->get();
+      
+        return view('ProjectList.summary',['projectmodule'=>$projectmodule,'taskdata'=>$taskdata]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  
 }

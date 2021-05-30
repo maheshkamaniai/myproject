@@ -35,7 +35,7 @@
                                                     <a href='<?= url('Project-List/add/' . $project->id) ?>'>
                                                         <span class="btn btn-primary btn-xs"><i class='fa fa-pencil'></i></span>
                                                     </a>
-                                                    <a href='projectsummary.php'>
+                                                    <a href='<?= url('Project-List/summary/' . $project->id) ?>'>
                                                         <span class="btn btn-warning btn-xs"><i class='fa fa-eye'></i></span>
                                                     </a>
                                                     <a class="btn btn-danger btn-flat btn-xs remove-user" data-id="{{ $project->id }}" data-action="#" onclick="deleteConfirmation({{$project->id}})"> <span class='fa fa-trash'></span></a>
