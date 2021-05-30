@@ -91,7 +91,7 @@
                                                 <tr>
                                                     <td>
                                                         <label class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input chack" data-id='<?= $task->id?>' name="example-checkbox1" value="option1">
+                                                            <input type="checkbox" class="custom-control-input check" <?php echo ($task->status==1 ? 'checked' : '');?> data-id='<?= $task->id?>' name="example-checkbox1" value="option1">
                                                             <span class="custom-control-label">
                                                                 <?php echo $task->title; ?></span>
                                                         </label>
@@ -160,5 +160,21 @@
     function toggleBox(x) {
         x.classList.toggle('opened');
     }
+    
+</script>
+<script>
+ $(".check").change(function() {
+    var ischecked= $(this).attr('data-id');
+    $.ajax({
+                    type: "POST",
+                    url: "{{ url('Project-List/updateTask') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "taskid":ischecked,
+                    },
+                    success: function(data) {
+                    }
+                });
+});
 </script>
 @endsection

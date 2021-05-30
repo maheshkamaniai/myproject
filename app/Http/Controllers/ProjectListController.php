@@ -137,5 +137,22 @@ class ProjectListController extends Controller
       
         return view('ProjectList.summary',['projectmodule'=>$projectmodule,'taskdata'=>$taskdata]);
     }
+    public function updateTask(Request $request)
+    {
+        $id=$request->taskid;
+        $task=DB::table('tbl_project_task')->where('id',$id)->first();
+        if($task->status==0)
+        {
+            DB::table('tbl_project_task')->where('id',$id)->update([
+                'status'=>1
+            ]);
+        }
+        else{
+            DB::table('tbl_project_task')->where('id',$id)->update([
+                'status'=>0
+            ]);
+        }
+
+    }
   
 }

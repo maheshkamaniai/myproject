@@ -42,6 +42,7 @@ Route::group(['prefix' => 'Client'], function () {
     Route::get('/add','ProjectListController@add')->middleware('addProjectlist');
     Route::get('/add/{id}','ProjectListController@add')->middleware('addProjectlist');
     Route::post('/insert','ProjectListController@insert')->middleware('addProjectlist');
+    Route::post('/updateTask','ProjectListController@updateTask')->middleware('addProjectlist');
     Route::get('/modulelist/{projectid}','ProjectListController@moduleList')->middleware('addProjectlist');
     Route::get('/modulelist/{projectid}/{id}','ProjectListController@moduleList')->middleware('addProjectlist');
     Route::post('/modulelist/insert','ProjectListController@insertModulelist')->middleware('addProjectlist');
