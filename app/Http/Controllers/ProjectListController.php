@@ -154,5 +154,33 @@ class ProjectListController extends Controller
         }
 
     }
+    public function addtaskbordstatush($id)
+    {
+        
+        $projectid=DB::table('tbl_project')->where('id',$id)->update([
+            'task_stetas'=>1,
+            ]);   
+            
+            $projectmodule=DB::table('tbl_project_module')->where('project_id',$id)->get();
+      
+            foreach($projectmodule as $post){
+                $moduleid=DB::table('tbl_tasklist')->insertGetId([
+                    'task'=>$post->module_name,
+                    'module'=>$post->id,
+                    'pid'=>$id,
+                    'mid'=>1
+                    ]);   
+
+                $projecttask=DB::table('tbl_project_task')->where('module_id',$post->id)->get();
+
+            foreach($projecttask as $data){
+                $taskid=DB::table('tbl_subtask')->insert([
+                    'taskname'=>$data->title,
+                    'mid'=>$moduleid
+                    ]);   
+            }
+            }
+         return redirect()->back();
+    }
   
 }

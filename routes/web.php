@@ -52,14 +52,18 @@ Route::group(['prefix' => 'Client'], function () {
     Route::get('/deleteProject/{id}', 'ProjectListController@deleteProject')->middleware('addProjectlist');
     Route::get('/deleteModule/{id}', 'ProjectListController@deleteModule')->middleware('addProjectlist');
     Route::get('/deleteTask/{id}', 'ProjectListController@deleteTask')->middleware('addProjectlist');
+//task statush
+    Route::get('/addtaskbordstatush/{id}','ProjectListController@addtaskbordstatush');
 
 });
-Route::group(['prefix' => 'Taskboard'], function () {
+    Route::group(['prefix' => 'Taskboard'], function () {
     Route::get('/', 'TaskboardController@index');
     Route::get('/add', 'TaskboardController@add');
     Route::post('/create','TaskboardController@insert');
     Route::get('/addmodule/{id}','TaskboardController@addmodule');
+    Route::get('/addsubtask/{id}','TaskboardController@addsubtask');
     Route::post('/addtask','TaskboardController@addtask');
+    Route::post('/addsubtaskname','TaskboardController@addsubtaskname');
 });
 
 Route::group(['prefix' => 'Team-Member'], function () {

@@ -64,6 +64,16 @@
                                                         <span class="avatar avatar-sm">+8</span>
                                                     </div>
                                                 </div>
+                                                <?php 
+                                                if($project->task_stetas==0){ ?>
+                                                    <div class="col-12 py-1 ">
+                                                        <div class="float-right">
+                                                            <a class="button" href="<?= url('Project-List/addtaskbordstatush/' . $project->id) ?>"><button class="btn btn-primary">Add Taskebord</button></a>
+                                                            </div>
+                                                        </div>
+                                               <?php } ?>
+                                                       
+                                                       
                                             </div>
                                         </div>
                                         <div class="card-footer">

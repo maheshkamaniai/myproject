@@ -56,7 +56,7 @@ class Taskboard extends Model
    }
     public function getTaskboardData()
     {
-      $Taskboard=DB::table('tbl_project')->get();
+      $Taskboard=DB::table('tbl_project')->where('task_stetas',1)->get();
     
       return $Taskboard;
     }
@@ -80,7 +80,7 @@ class Taskboard extends Model
 
       $taskid=DB::table('tbl_tasklist')->insertGetId([
          'task'=>$task,
-         'module'=>Auth::user()->id,
+         
          'pid'=>$pid,
          'mid'=>$mid
       ]);   

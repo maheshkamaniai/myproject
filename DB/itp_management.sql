@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2021 at 05:37 PM
+-- Generation Time: May 30, 2021 at 02:54 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.3.28
 
@@ -167,17 +167,18 @@ CREATE TABLE `tbl_project` (
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `task_stetas` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_project`
 --
 
-INSERT INTO `tbl_project` (`id`, `technology_used`, `team_member_id`, `project_status`, `project_title`, `client_id`, `project_logo`, `project_description`, `project_start_date`, `project_deliverable_day`, `project_end_date`, `project_document`, `total_module`, `isdelete`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, '1,2', '1,2', 1, 'sujata', 1, '1615103871.png', 'sujata is management system', '2021-03-09 16:01:00', 30, NULL, '', NULL, 1, NULL, NULL, NULL, NULL),
-(4, 'Laravel,Angular', '1,2', 1, 'online kirana', 1, '1615105258.png', 'ecommers side', '2021-03-21 06:32:13', 30, NULL, '16151052581.pdf,16151052582.pdf,16151052583.pdf,', NULL, 0, NULL, NULL, NULL, NULL),
-(5, 'Laravel,Angular', '1', 2, 'ajay metal', 2, '1615112907.jpg', 'ajay metal project', '2021-03-12 18:30:00', 10, NULL, '16151129081.pdf,16151129082.pdf,16151129083.pdf,', NULL, 0, NULL, NULL, NULL, NULL);
+INSERT INTO `tbl_project` (`id`, `technology_used`, `team_member_id`, `project_status`, `project_title`, `client_id`, `project_logo`, `project_description`, `project_start_date`, `project_deliverable_day`, `project_end_date`, `project_document`, `total_module`, `isdelete`, `created_by`, `updated_by`, `created_at`, `updated_at`, `task_stetas`) VALUES
+(1, '1,2', '1,2', 1, 'sujata', 1, '1615103871.png', 'sujata is management system', '2021-03-09 16:01:00', 30, NULL, '', NULL, 1, NULL, NULL, NULL, NULL, 0),
+(4, 'Laravel,Angular', '1,2', 1, 'online kirana', 1, '1615105258.png', 'ecommers side', '2021-05-30 09:43:11', 30, NULL, '16151052581.pdf,16151052582.pdf,16151052583.pdf,', NULL, 0, NULL, NULL, NULL, NULL, 1),
+(5, 'Laravel,Angular', '1', 2, 'ajay metal', 2, '1615112907.jpg', 'ajay metal project', '2021-03-12 18:30:00', 10, NULL, '16151129081.pdf,16151129082.pdf,16151129083.pdf,', NULL, 0, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,8 @@ CREATE TABLE `tbl_project_module` (
 --
 
 INSERT INTO `tbl_project_module` (`id`, `project_id`, `module_name`, `status`, `module_description`, `module_document`, `isdelete`, `created_by`, `created_on`, `updated_by`, `updated_on`) VALUES
-(1, 4, 'HRMS', 0, 'user module', '16153948141.pdf,16153948142.pdf,16153948143.pdf,', 1, NULL, '2021-03-10 16:46:54', NULL, '2021-03-21 12:35:27');
+(1, 4, 'HRMS', 0, 'user module', '16153948141.pdf,16153948142.pdf,16153948143.pdf,', 0, NULL, '2021-03-10 16:46:54', NULL, '2021-05-29 23:40:22'),
+(2, 4, 'Project Management', 0, 'project management', '', 0, NULL, '2021-05-30 07:10:59', NULL, '2021-05-30 00:10:59');
 
 -- --------------------------------------------------------
 
@@ -231,8 +233,40 @@ CREATE TABLE `tbl_project_task` (
 --
 
 INSERT INTO `tbl_project_task` (`id`, `title`, `module_id`, `sdate`, `edate`, `status`, `created_by`, `created_on`, `updated_by`, `updated_on`, `isdelete`) VALUES
-(1, 'user', 1, '2021-03-18', '2021-03-20', 0, NULL, '2021-03-17 04:55:20', NULL, '2021-03-17 10:25:20', 0),
-(2, 'user', 1, '2021-03-18', '2021-03-20', 0, NULL, '2021-03-17 06:01:46', NULL, '2021-03-21 12:35:05', 1);
+(1, 'user', 1, '2021-03-18', '2021-03-20', 0, NULL, '2021-03-17 04:55:20', NULL, '2021-05-30 01:45:09', 0),
+(2, 'Roale', 1, '2021-03-18', '2021-03-20', 0, NULL, '2021-03-17 06:01:46', NULL, '2021-05-30 00:00:41', 0),
+(3, 'add project', 2, '2021-05-24', '2021-05-30', 0, NULL, '2021-05-30 07:11:39', NULL, '2021-05-30 00:11:39', 0),
+(4, 'task', 2, '2021-05-19', '2021-05-24', 1, NULL, '2021-05-30 07:11:57', NULL, '2021-05-30 01:45:22', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_subtask`
+--
+
+CREATE TABLE `tbl_subtask` (
+  `id` int(11) NOT NULL,
+  `mid` int(11) DEFAULT NULL,
+  `taskname` varchar(155) DEFAULT NULL,
+  `status` int(11) DEFAULT 0,
+  `isdelete` tinyint(4) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_subtask`
+--
+
+INSERT INTO `tbl_subtask` (`id`, `mid`, `taskname`, `status`, `isdelete`) VALUES
+(1, 1, 'user', 0, 0),
+(2, 1, 'Roale', 0, 0),
+(3, 2, 'add project', 0, 0),
+(4, 2, 'task', 0, 0),
+(5, 1, 'mmm', 0, 0),
+(6, 1, 'mmm', 0, 0),
+(7, 1, 'mm', 0, 0),
+(8, 1, 'mm', 0, 0),
+(9, 1, 'mm', 0, 0),
+(10, 1, 'm', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -242,6 +276,8 @@ INSERT INTO `tbl_project_task` (`id`, `title`, `module_id`, `sdate`, `edate`, `s
 
 CREATE TABLE `tbl_tasklist` (
   `id` int(10) UNSIGNED NOT NULL,
+  `pid` int(11) DEFAULT NULL,
+  `mid` int(11) DEFAULT NULL,
   `task` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
@@ -252,14 +288,9 @@ CREATE TABLE `tbl_tasklist` (
 -- Dumping data for table `tbl_tasklist`
 --
 
-INSERT INTO `tbl_tasklist` (`id`, `task`, `created_at`, `updated_at`, `module`) VALUES
-(1, 'demo', NULL, NULL, 1),
-(2, 'demo', NULL, NULL, 1),
-(3, 'demo1', '2021-03-13 11:31:42', '2021-03-13 11:31:42', 1),
-(4, 'demo', '2021-03-18 04:37:59', '2021-03-18 04:37:59', 1),
-(5, 'user', '2021-03-23 06:59:32', '2021-03-23 06:59:32', 1),
-(6, 'user', '2021-04-11 08:57:12', '2021-04-11 08:57:12', 1),
-(7, 'user1', '2021-04-11 08:59:02', '2021-04-11 08:59:02', 1);
+INSERT INTO `tbl_tasklist` (`id`, `pid`, `mid`, `task`, `created_at`, `updated_at`, `module`) VALUES
+(1, 4, 1, 'HRMS', '2021-05-30 09:43:11', '2021-05-30 09:43:11', 1),
+(2, 4, 1, 'Project Management', '2021-05-30 09:43:11', '2021-05-30 09:43:11', 2);
 
 -- --------------------------------------------------------
 
@@ -276,25 +307,26 @@ CREATE TABLE `tbl_teammember` (
   `email` varchar(50) NOT NULL,
   `isdelete` int(11) NOT NULL DEFAULT 0,
   `created_by` int(11) NOT NULL,
-  `img` varchar(250) NOT NULL
+  `img` varchar(250) NOT NULL,
+  `Roal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_teammember`
 --
 
-INSERT INTO `tbl_teammember` (`id`, `name`, `dob`, `gender`, `phone`, `email`, `isdelete`, `created_by`, `img`) VALUES
-(1, 'test', '9/10/1922', 0, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(2, 'test2', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(3, 'test2', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(4, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(5, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(6, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(7, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(8, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(9, 'test', '9/10/1922', 0, '11', 'admin@gmail.com', 0, 1, '1622291215.png'),
-(10, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291266.jpg'),
-(11, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 1, 1, '1622291312.jpg');
+INSERT INTO `tbl_teammember` (`id`, `name`, `dob`, `gender`, `phone`, `email`, `isdelete`, `created_by`, `img`, `Roal`) VALUES
+(1, 'test55', '9/10/1922', 0, '9724855506', 'admin@gmail.com', 0, 1, '1622349789.jpg', 1),
+(2, 'test2', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png', 0),
+(3, 'test2', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png', 0),
+(4, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png', 0),
+(5, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png', 0),
+(6, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png', 0),
+(7, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png', 0),
+(8, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291215.png', 0),
+(9, 'test', '9/10/1922', 0, '11', 'admin@gmail.com', 0, 1, '1622291215.png', 0),
+(10, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 0, 1, '1622291266.jpg', 0),
+(11, 'test', '9/10/1922', 1, '9724855506', 'admin@gmail.com', 1, 1, '1622291312.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -372,6 +404,12 @@ ALTER TABLE `tbl_project_task`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_subtask`
+--
+ALTER TABLE `tbl_subtask`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_tasklist`
 --
 ALTER TABLE `tbl_tasklist`
@@ -428,19 +466,25 @@ ALTER TABLE `tbl_project`
 -- AUTO_INCREMENT for table `tbl_project_module`
 --
 ALTER TABLE `tbl_project_module`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_task`
 --
 ALTER TABLE `tbl_project_task`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_subtask`
+--
+ALTER TABLE `tbl_subtask`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_tasklist`
 --
 ALTER TABLE `tbl_tasklist`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_teammember`

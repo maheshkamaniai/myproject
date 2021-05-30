@@ -31,7 +31,7 @@
                                     if($data->mid==$post->id){?>
                                     <div class="row">
                                         <div class="col-12">
-                                            <a href="{{ URL('Taskboard/addmodule/' . $id) }}">
+                                            <a href="{{ URL('Taskboard/addsubtask/' . $data->id) }}">
                                                 <div class="col-12 py-1 shadow-sm p-2 mb-2 bg-white rounded">
                                                     <strong><?=$data->task?></strong><br>
                                                     <span class="badge-text js-checkitems-badge-text">2/15</span>
