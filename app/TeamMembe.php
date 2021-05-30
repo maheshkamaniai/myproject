@@ -20,6 +20,7 @@ class TeamMembe extends Model
        $gender=$request->gender;
        $phone=$request->phone;
        $email=$request->email;
+       $Roal=$request->Roal;
 
       $projectid=DB::table('tbl_teammember')->insert([
          'name'=>$name,
@@ -28,6 +29,7 @@ class TeamMembe extends Model
          'phone'=>$phone,
          'email'=>$email,
          'img'=> $filename,
+         'Roal'=> $Roal,
          'created_by'=>Auth::user()->id,
       ]);   
       
@@ -43,15 +45,26 @@ class TeamMembe extends Model
       $gender=$request->gender;
       $phone=$request->phone;
       $email=$request->email;
+      $Roal=$request->Roal;
       $id=$request->id;
     
-      $clientid=DB::table('tbl_client')->where('id',$id)->update([
+      
+
+      if($request->pimage!=""){
+         $filename = time() . '.' . $request->pimage->extension();
+         $request->pimage->move(public_path('pimage'),$filename);
+            $clientid=DB::table('tbl_teammember')->where('id',$id)->update([
+               'img'=> $filename,
+            ]);
+      }
+      $clientid=DB::table('tbl_teammember')->where('id',$id)->update([
          'name'=>$name,
          'dob'=>$dob,
          'gender'=>$gender,
          'phone'=>$phone,
          'email'=>$email,
-         'img'=> $filename,
+         'Roal'=>$Roal,
+         // 'img'=> $filename,
          'created_by'=>Auth::user()->id,
       ]);
    }
@@ -60,29 +73,29 @@ class TeamMembe extends Model
       $TeamMembe=DB::table('tbl_teammember')->where('isdelete',0)->get();
       return $TeamMembe;
     }
-    public function getModuleData()
-    {
-      $moduledata=DB::table('tbl_module')->where('isdelete',0)->get();
-      return $moduledata;
-    }
+   //  public function getModuleData()
+   //  {
+   //    $moduledata=DB::table('tbl_module')->where('isdelete',0)->get();
+   //    return $moduledata;
+   //  }
 
-    public function inserttask(Request $request)
-   {
-      // exit;
-      $task=$request->task;
-      $taskid=DB::table('tbl_tasklist')->insertGetId([
-         'task'=>$task,
-         'module'=>Auth::user()->id,
-      ]);   
-      // echo $taskid;exit;
-       return $taskid;
-   }
-   public function gettaskData()
-   {
-     $taskData=DB::table('tbl_tasklist')->get();
+   //  public function inserttask(Request $request)
+   // {
+   //    // exit;
+   //    $task=$request->task;
+   //    $taskid=DB::table('tbl_tasklist')->insertGetId([
+   //       'task'=>$task,
+   //       'module'=>Auth::user()->id,
+   //    ]);   
+   //    // echo $taskid;exit;
+   //     return $taskid;
+   // }
+   // public function gettaskData()
+   // {
+   //   $taskData=DB::table('tbl_tasklist')->get();
    
-     return $taskData;
-   }
+   //   return $taskData;
+   // }
    
 
 }

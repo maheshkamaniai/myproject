@@ -14,18 +14,11 @@
     <div class="container-fluid">
       <div class="row clearfix">
         <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
               <div class="d-md-flex justify-content-between mb-2">
                 <ul class="nav nav-tabs b-none">
-                  <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#list"><i
-                        class="fa fa-list-ul"></i> Clients List</a></li>
-                  <!-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="{{url('Team-Member/add')}}"><i class="fa fa-plus"></i> Add New</a></li> -->
                 </ul>
                 <A href="{{url('Team-Member/add')}}"><button class="btn btn-primary">add </button></A>
               </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -41,7 +34,11 @@
               <div class="card">
 
                 <div class="card-body text-center ribbon">
-                  <div class="ribbon-box green">New</div>
+                  <div class="ribbon-box green"><?php if($post->Roal==1){ 
+                    echo "Developer"; 
+                  }else{ 
+                    echo "Tester"; 
+                  }?></div>
 
                   <div class="pull-right">
                   <a href='<?= url('Team-Member/add/' . $post->id) ?>'>

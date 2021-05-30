@@ -10,6 +10,7 @@ $val_phone = '';
 $val_email = '';
 $val_img = '';
 $val_id = '';
+$val_Roal = '';
 if ($id != '') {
     $val_name = $data->name;
     $val_email = $data->email;
@@ -18,6 +19,7 @@ if ($id != '') {
     $val_img = $data->img;
     $val_gender = $data->gender;
     $val_id = $data->id;
+    $val_Roal = $data->Roal;
 }
 ?>
 
@@ -71,11 +73,20 @@ if ($id != '') {
                       </div>
                     </div>
                     <div class="col-md-3 col-sm-12">
+                      <label>Roal</label>
+                      <select class="form-control show-tick" name="Roal" >
+                        <option value="">-- Roal --</option>
+                        <option value="1" @if($val_Roal==1) selected @endif>Developer</option>
+                        <option value="0" @if($val_Roal==0) selected @endif>Tester</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12">
                       <label>Gender</label>
                       <select class="form-control show-tick" name="gender" >
                         <option value="">-- Gender --</option>
-                        <option value="1">Male</option>
-                        <option value="0">Female</option>
+                        <option value="1" @if($val_gender==1) selected @endif>Male</option>
+                        <option value="0" @if($val_gender==0) selected @endif>Female</option>
                       </select>
                     </div>
                  
