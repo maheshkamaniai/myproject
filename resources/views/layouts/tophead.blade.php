@@ -146,17 +146,7 @@
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <a class="dropdown-item" href="page-profile.php"><i
                                     class="dropdown-icon fa fa-user"></i> Profile</a>
-                            <a class="dropdown-item" href="app-setting.php"><i
-                                    class="dropdown-icon fa fa-cog"></i> Settings</a>
-                            <a class="dropdown-item" href="javascript:void(0)"><span class="float-right"><span
-                                        class="badge badge-primary">6</span></span><i
-                                    class="dropdown-icon fa fa-envelope"></i> Inbox</a>
-                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                    class="dropdown-icon fa fa-send"></i> Message</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                    class="dropdown-icon fa fa-question-circle"></i> Need help?</a>
-                            <a class="dropdown-item" href="login.php"><i
+                            <a class="dropdown-item" href="{{url('/logout')}}"><i
                                     class="dropdown-icon fa fa-sign-out"></i> Sign out</a>
                         </div>
                     </div>

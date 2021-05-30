@@ -16,7 +16,7 @@ Route::get('/', 'IndexController@index');
 //     return view('index');
 // });
 Auth::routes();
-
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/home','HomeController@index')->name('home');
 //Route::get('/Project-List','ProjectListController@index')->name('home');
 Route::get('/Taskboard','TaskboardController@index')->name('home');
