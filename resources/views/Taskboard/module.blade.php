@@ -14,7 +14,7 @@
             <div class="section-body">
                 <div class="container">
                     <div class="d-flex flex-row flex-nowrap overflow-auto mt-4">
-                        <?php // print_r($moduledata);
+                        <?php 
                         foreach ($moduledata as $post) { ?>
                         <div class="col-lg-3 4">
                             <div class="card">
@@ -28,15 +28,18 @@
                                 
                                 <div class="card-bodybg">
                                 <?php foreach($taskdata as $data) { 
-                                    if($data->mid==$post->id){?>
+                                    if($data->mid==$post->id){
+                                        $totaltask=DB::table('tbl_subtask')->where('isdelete',0)->where('mid',$data->id)->count();
+                                        $completetask=DB::table('tbl_subtask')->where('isdelete',0)->where('mid',$data->id)->where('status',1)->count();
+                                        ?>
                                     <div class="row">
                                         <div class="col-12">
                                             <a href="{{ URL('Taskboard/addsubtask/' . $data->id) }}">
                                                 <div class="col-12 py-1 shadow-sm p-2 mb-2 bg-white rounded">
                                                     <strong><?=$data->task?></strong><br>
-                                                    <span class="badge-text js-checkitems-badge-text">2/15</span>
+                                                    <span class="badge-text js-checkitems-badge-text"><?= $completetask?>/<?=$totaltask?></span>
                                             </a>
-                                            <button class='btn btn-info btn-xs pull-right'><i class='fa fa-check'></i></button>
+                                            <button class='btn btn-info btn-xs pull-right moves' data-toggle="modal" data-target="#myModal" data-id='<?=$data->id?>'>Move</button>
                                         </div>
                                     </div>
                                 </div>
@@ -60,6 +63,33 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                    <form method='post' action='{{url("Taskboard/changeTask/")}}'>
+                    <!-- Modal content-->
+                    {{ csrf_field() }}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                        <input type='hidden' id='search' name='search' value=''>
+                        <select name='module' class='form-control'>
+                        <?php 
+                        foreach ($moduledata as $post) { ?>
+                        <option value='<?= $post->id?>'><?=$post->name?></option>
+                        <?php }?>
+                        <option value='0'>Remove From Taskboard</option>
+                        </select>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Move</button>
+                        </div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+
     <div class="section-body">
         @include('layouts.footar')
     </div>
@@ -67,53 +97,9 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#ntdfooterhide').click(function() {
-                $('#ntdformhide').removeClass('hide')
-                $('#ntdfooterhide').addClass('hide')
-            });
-
-        });
-
-        $(document).ready(function() {
-            $('#idfooterhide').click(function() {
-                $('#idformhide').removeClass('hide')
-                $('#idfooterhide').addClass('hide')
-            });
-
-        });
-
-        $(document).ready(function() {
-            $('#nttfooterhide').click(function() {
-                $('#nttformhide').removeClass('hide')
-                $('#nttfooterhide').addClass('hide')
-            });
-
-        });
-        $(document).ready(function() {
-            $('#utfooterhide').click(function() {
-                $('#utformhide').removeClass('hide')
-                $('#utfooterhide').addClass('hide')
-            });
-
-        });
-        $(document).ready(function() {
-            $('#utpfooterhide').click(function() {
-                $('#utpformhide').removeClass('hide')
-                $('#utpfooterhide').addClass('hide')
-            });
-
-        });
-        $(document).ready(function() {
-            $('#ptfooterhide').click(function() {
-                $('#ptformhide').removeClass('hide')
-                $('#ptfooterhide').addClass('hide')
-            });
-
-        });
-        $(document).ready(function() {
-            $('#dfooterhide').click(function() {
-                $('#dformhide').removeClass('hide')
-                $('#dfooterhide').addClass('hide')
+            $('.moves').click(function() {
+                var id=$(this).attr('data-id');
+                $('#search').val(id);
             });
 
         });

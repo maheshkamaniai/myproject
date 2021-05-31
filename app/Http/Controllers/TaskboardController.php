@@ -25,6 +25,18 @@ class TaskboardController extends Controller
         }
 
     }
+    public function changeTask(Request $request)
+    {
+        $id=$request->search;
+        $mid=$request->module;
+        if($id!='')
+        {
+            DB::table('tbl_tasklist')->where('id',$id)->update([
+                'mid'=>$mid
+            ]);
+        }
+        return redirect()->back();
+    }
 
     public function addmodule($id)
     {
