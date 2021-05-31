@@ -27,6 +27,14 @@ class ProjectListController extends Controller
             ->where('tbl_project.isdelete',0)->where('tbl_project.project_status',2)->get();
             return view('ProjectList.index2',['projectlist'=>$projectlist]);
     }
+    public function index3(Request $request)
+    {
+        $projectlist=DB::table('tbl_project')
+            ->leftJoin('tbl_client','tbl_project.client_id','tbl_client.id')
+            ->select('tbl_project.*','tbl_client.company_name')
+            ->where('tbl_project.isdelete',0)->where('tbl_project.project_status',3)->get();
+            return view('ProjectList.index3',['projectlist'=>$projectlist]);
+    }
     public function add(Request $request)
     {
         $id=$request->id;

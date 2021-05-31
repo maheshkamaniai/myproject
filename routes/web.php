@@ -39,6 +39,7 @@ Route::group(['prefix' => 'Client'], function () {
     Route::get('/ongoing','ProjectListController@index1')->middleware('viewProjectlist');
     Route::get('/summary/{id}','ProjectListController@summary');
     Route::get('/upcomming','ProjectListController@index2')->middleware('viewProjectlist');
+    Route::get('/closed','ProjectListController@index3')->middleware('viewProjectlist');
     Route::get('/add','ProjectListController@add')->middleware('addProjectlist');
     Route::get('/add/{id}','ProjectListController@add')->middleware('addProjectlist');
     Route::post('/insert','ProjectListController@insert')->middleware('addProjectlist');
