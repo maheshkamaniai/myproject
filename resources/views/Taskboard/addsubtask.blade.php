@@ -38,7 +38,7 @@
                                     <tr>
                                         <td>
                                             <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
+                                                <input type="checkbox" class="custom-control-input check" data-id='{{ $post->id }}' name="example-checkbox1" value="option1" <?php echo ($post->status==1 ? 'checked' : '');?>>
                                                 <span class="custom-control-label"><?=$post->taskname?></span>
                                             </label>
                                         </td>
@@ -102,7 +102,7 @@
     var ischecked= $(this).attr('data-id');
     $.ajax({
                     type: "POST",
-                    url: "{{ url('Project-List/updateTask') }}",
+                    url: "{{ url('Taskboard/updateTask') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "taskid":ischecked,

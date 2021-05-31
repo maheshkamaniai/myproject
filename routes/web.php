@@ -65,6 +65,7 @@ Route::group(['prefix' => 'Client'], function () {
     Route::get('/addsubtask/{id}','TaskboardController@addsubtask');
     Route::post('/addtask','TaskboardController@addtask');
     Route::post('/addsubtaskname','TaskboardController@addsubtaskname');
+    Route::post('/updateTask','TaskboardController@updateTask');
 });
 
 Route::group(['prefix' => 'Team-Member'], function () {

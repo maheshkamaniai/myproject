@@ -64,4 +64,21 @@ class TaskboardController extends Controller
 
         return redirect()->back();
     }
+    public function updateTask(Request $request)
+    {
+        $id=$request->taskid;
+        $task=DB::table('tbl_subtask')->where('id',$id)->first();
+        if($task->status==0)
+        {
+            DB::table('tbl_subtask')->where('id',$id)->update([
+                'status'=>1
+            ]);
+        }
+        else{
+            DB::table('tbl_subtask')->where('id',$id)->update([
+                'status'=>0
+            ]);
+        }
+
+    }
 }
