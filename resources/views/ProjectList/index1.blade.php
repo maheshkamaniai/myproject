@@ -48,11 +48,13 @@
                       <?php 
                       $moid=$project->id;
                       $modualcount=DB::table('tbl_project_module')->where('isdelete',0)->where('project_id',$moid)->count();
-
+                      $completecount=DB::table('tbl_project_module')->where('isdelete',0)->where('status',1)->where('project_id',$moid)->count();
                     $articles =DB::table('tbl_project_module')
                 ->join('tbl_project_task', 'tbl_project_module.id', '=', 'tbl_project_task.module_id')
                 ->select('tbl_project_task.module_id')
+                ->where('tbl_project_task.isdelete',0)->where('tbl_project_module.project_id',$moid)
                 ->count();
+                $progress=($completecount*100)/$modualcount;
 
                     ?>
                       <div class="col-7 py-1"><strong><?php echo $modualcount; ?></strong></div>
@@ -81,11 +83,11 @@
                   </div>
                   <div class="card-footer">
                     <div class="clearfix">
-                      <div class="float-left"><strong>15%</strong></div>
+                      <div class="float-left"><strong><?= $progress?>%</strong></div>
                       <div class="float-right"><small class="text-muted">Progress</small></div>
                     </div>
                     <div class="progress progress-xs">
-                      <div class="progress-bar bg-red" role="progressbar" style="width: 25%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar bg-red" role="progressbar" style="width: <?=$progress?>%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>

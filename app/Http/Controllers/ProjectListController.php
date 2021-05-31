@@ -161,6 +161,19 @@ class ProjectListController extends Controller
                 'status'=>0
             ]);
         }
+        $pendingtask=DB::table('tbl_project_task')->where('isdelete',0)->where('status',0)->where('module_id',$task->module_id)->get();
+        if(count($pendingtask)==0)
+        {
+            DB::table('tbl_project_module')->where('id',$task->module_id)->update([
+                'status'=>1
+            ]);
+        }
+        else{
+            DB::table('tbl_project_module')->where('id',$task->module_id)->update([
+                'status'=>0
+            ]);
+        }
+
 
     }
     public function addtaskbordstatush($id)
