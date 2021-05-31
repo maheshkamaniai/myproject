@@ -3,13 +3,9 @@
         <div class="page-header">
             <div class="left">
                 <a href="javascript:void(0)" class="icon menu_toggle mr-3"><i class="fa  fa-align-left"></i></a>
-                <h1 class="page-title">Project List</h1>
+                <h1 class="page-title"><?= $page?></h1>
             </div>
             <div class="right">
-                <div class="input-icon xs-hide mr-4">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-icon-addon"><i class="fe fe-search"></i></span>
-                </div>
                 <div class="notification d-flex">
                     <div class="dropdown d-flex">
                         <a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-2"

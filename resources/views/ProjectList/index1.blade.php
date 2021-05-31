@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<?php $page='ProjectList'; ?>
 <div id="main_content">
   @include('layouts.sidebar')
   <style>
@@ -54,6 +55,7 @@
                 ->select('tbl_project_task.module_id')
                 ->where('tbl_project_task.isdelete',0)->where('tbl_project_module.project_id',$moid)
                 ->count();
+                $teammember=DB::table('tbl_teammember')->whereIn('id',explode(",", $project->team_member_id))->select('img')->get();
                 $progress=($completecount*100)/$modualcount;
 
                     ?>
@@ -63,12 +65,17 @@
                       <div class="col-5 py-1"><strong>Team:</strong></div>
                       <div class="col-7 py-1">
                         <div class="avatar-list avatar-list-stacked">
-                          <img class="avatar avatar-sm" src="assets/images/xs/avatar1.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name" />
-                          <img class="avatar avatar-sm" src="assets/images/xs/avatar2.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name" />
-                          <img class="avatar avatar-sm" src="assets/images/xs/avatar3.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name" />
-                          <img class="avatar avatar-sm" src="assets/images/xs/avatar4.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name" />
-                          <img class="avatar avatar-sm" src="assets/images/xs/avatar5.jpg" data-toggle="tooltip" title="" data-original-title="Avatar Name" />
-                          <span class="avatar avatar-sm">+8</span>
+                          <?php 
+                          if($teammember!='')
+                          {
+                            foreach($teammember as $team)
+                            {
+                          ?>
+                          <img class="avatar avatar-sm" src="{{URL::asset('pimage/'.$team->img)}}" data-toggle="tooltip" title="" data-original-title="Avatar Name" />
+                          <?php
+                            }
+                          }
+                          ?>
                         </div>
                       </div>
                       <?php 

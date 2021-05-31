@@ -22,6 +22,7 @@ class HomeController extends Controller
         
 
         $Summary = DB::table('tbl_project')
+        ->where('tbl_project.isdelete',0)
         ->select('*')
         ->leftJoin('tbl_client','tbl_project.client_id', '=', 'tbl_client.id')
         ->get();

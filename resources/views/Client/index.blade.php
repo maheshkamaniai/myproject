@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<?php $page='Client'; ?>
     @include('layouts.sidebar')
     <div class="page">
     @include('layouts.tophead')

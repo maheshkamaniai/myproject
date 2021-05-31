@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<?php $page='ProjectList'; ?>
 <?php
 $button = 'Add';
 $title = '';

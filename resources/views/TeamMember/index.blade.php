@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @include('layouts.sidebar')
+<?php $page='TeamMember'; ?>
 <?php
   // print_r($TeamMembe);exit;
   ?>

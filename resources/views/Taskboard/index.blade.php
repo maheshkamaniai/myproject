@@ -1,6 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
+<?php $page='Taskboard'; ?>
     <div id="main_content">
         @include('layouts.sidebar')
         <div class="page">

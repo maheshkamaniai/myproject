@@ -5,6 +5,7 @@
 
 @include('layouts.sidebar')
 <?php
+$page='Client';
 $val_name = '';
 $val_email = '';
 $val_address = '';

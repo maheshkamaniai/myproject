@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<?php $page='ProjectList'; ?>
 <div id="main_content">
     @include('layouts.sidebar')
     <style>

@@ -26,6 +26,7 @@ $val_deliverable_day = $projectdata->project_deliverable_day;
 $val_project_doc = $projectdata->project_document;
 }
 ?>
+<?php $page='ProjectList'; ?>
 <div id="main_content">
 @include('layouts.sidebar')
 
