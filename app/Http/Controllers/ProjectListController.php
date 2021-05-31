@@ -44,7 +44,8 @@ class ProjectListController extends Controller
             $projectdata=DB::table('tbl_project')->where('isdelete',0)->where('id',$id)->get()->first();
         }
         $clientlist=DB::table('tbl_client')->where('isdelete',0)->get();
-        return view('ProjectList.add',['clientlist'=>$clientlist,'projectdata'=>$projectdata,'id'=>$id]);
+        $membaer=DB::table('tbl_teammember')->select('id','name')->where('isdelete',0)->get();
+        return view('ProjectList.add',['membaer'=>$membaer,'clientlist'=>$clientlist,'projectdata'=>$projectdata,'id'=>$id]);
     }
     public function insert(Request $request)
     {

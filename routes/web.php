@@ -13,11 +13,13 @@
 
 Route::get('/', 'IndexController@index');
 // Route::get('/',function(){
-//     return view('index');
+//     return view('auth/profile');
 // });
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/home','HomeController@index')->name('home');
+Route::get('/profile/{id}','ProfileController@index');
+Route::post('/addprofile','ProfileController@add');
 //Route::get('/Project-List','ProjectListController@index')->name('home');
 Route::get('/Taskboard','TaskboardController@index')->name('home');
 Route::get('/Team-Member','TeamMemberController@index')->name('home');

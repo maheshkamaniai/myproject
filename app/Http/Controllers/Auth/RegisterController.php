@@ -47,7 +47,7 @@ class RegisterController extends Controller
     {
     $user = new User();
     $filename = time() . '.' . $user->profile = $data['profile']->extension();
-    
+   
     $data['profile']->move(public_path('images'),$filename);
     $user = User::create([
         'name' => $data['name'],
