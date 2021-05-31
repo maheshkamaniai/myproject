@@ -66,6 +66,7 @@ Route::group(['prefix' => 'Client'], function () {
     Route::get('/addmodule/{id}','TaskboardController@addmodule');
     Route::get('/addsubtask/{id}','TaskboardController@addsubtask');
     Route::post('/addtask','TaskboardController@addtask');
+    Route::post('/changeTask','TaskboardController@changeTask');
     Route::post('/addsubtaskname','TaskboardController@addsubtaskname');
     Route::post('/updateTask','TaskboardController@updateTask');
 });
@@ -76,6 +77,7 @@ Route::group(['prefix' => 'Team-Member'], function () {
     Route::post('/create','TeamMemberController@insert');
     Route::get('/addmodule/{id}','TeamMemberController@addmodule');
     Route::post('/addtask','TeamMemberController@addtask');
+    
     Route::get('/deleteProject/{id}', 'TeamMemberController@delete');
     Route::get('/add/{id}','TeamMemberController@add');
 });
