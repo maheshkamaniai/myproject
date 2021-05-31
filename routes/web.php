@@ -61,17 +61,14 @@ Route::group(['prefix' => 'Client'], function () {
     Route::get('/add', 'TaskboardController@add');
     Route::post('/create','TaskboardController@insert');
     Route::get('/addmodule/{id}','TaskboardController@addmodule');
-    Route::get('/addsubtask/{id}','TaskboardController@addsubtask');
-    Route::post('/addtask','TaskboardController@addtask');
-    Route::post('/addsubtaskname','TaskboardController@addsubtaskname');
 });
 
 Route::group(['prefix' => 'Team-Member'], function () {
     Route::get('/', 'TeamMemberController@index');
     Route::get('/add', 'TeamMemberController@add');
     Route::post('/create','TeamMemberController@insert');
-    // Route::get('/addmodule/{id}','TeamMemberController@addmodule');
-    // Route::post('/addtask','TeamMemberController@addtask');
+    Route::get('/addmodule/{id}','TeamMemberController@addmodule');
+    Route::post('/addtask','TeamMemberController@addtask');
     Route::get('/deleteProject/{id}', 'TeamMemberController@delete');
     Route::get('/add/{id}','TeamMemberController@add');
 });
