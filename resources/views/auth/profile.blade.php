@@ -9,7 +9,7 @@
     $val_id = $data[0]->id;
 
 ?>
-
+<?php $page='Profile'; ?>
 <div id="main_content">
     @include('layouts.sidebar')
     <div class="page">

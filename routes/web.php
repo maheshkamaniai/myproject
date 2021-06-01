@@ -12,6 +12,14 @@
 */
 
 Route::get('/', 'IndexController@index');
+
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/','UserController@index');
+    Route::get('/add','UserController@add');
+    Route::post('/save','UserController@save');
+});
+
 // Route::get('/',function(){
 //     return view('auth/profile');
 // });
