@@ -26,7 +26,7 @@
                 <div class="tab-pane fade show active" id="addnew" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-12">
-                                <table class='table'>
+                                <table class='table' id='example'>
                                     <tr class='thead-dark'>
                                         <th>#</th>
                                         <th>Company Name</th>
@@ -69,8 +69,13 @@
 <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
-
-
+<script src="https://code.jquery.com/jquery-1.7.0.min.js" integrity="sha256-/05Jde9AMAT4/o5ZAI23rUf1SxDYTHLrkOco0eyRV84=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.7.0/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready( function () {
+    $('#example').dataTable();
+} );
+</script>
 <script type="text/javascript">
     function deleteConfirmation(id) {
         swal({
