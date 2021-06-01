@@ -2,12 +2,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>{{ config('app.name', 'Awesome Infosys') }}</title>
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
 <title>Awesome Infosys</title>
-<link rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}">
+<link rel="shortcut icon" href="{{ asset('assets/favicon.jpg') }}">
 <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css') }}" />
 <link rel="stylesheet" href="{{asset('assets/plugins/charts-c3/c3.min.css') }}" />
 <link rel="stylesheet" href="{{asset('assets/css/main.css') }}" />
