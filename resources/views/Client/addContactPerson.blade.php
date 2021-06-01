@@ -127,7 +127,7 @@ if ($subid != '') {
                                             <td>
                                                 <div class=btn-group><a href='<?= url('Client/addContactPerson/' . $id . "/" . $post->id) ?>' class='btn btn-info btn-xs'><span class='fa fa-pencil'></span></a>
                                                 </div>
-                                                <div class=btn-group><a href='javascript:void(0)' class='btn btn-danger btn-xs removercd' data-id='<?= $post->id ?>'><span class='fa fa-trash'></span></a>
+                                                <div class=btn-group><a href='javascript:void(0)' class='btn btn-danger btn-xs removercd' data-id='<?= $post->id ?>' onclick="deleteConfirmation({{$post->id}})"><span class='fa fa-trash'></span></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -141,25 +141,46 @@ if ($subid != '') {
             </div>
         </div>
     </div>
-    <div class="section-body">
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                        <a href="templateshub.net">Templates Hub</a>
-                    </div>
-                    <div class="col-md-6 col-sm-12 text-md-right">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item"><a href="doc/index.php">Documentation</a></li>
-                            <li class="list-inline-item"><a href="javascript:void(0)">FAQ</a></li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">Buy Now</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+    
 </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
+
+<script type="text/javascript">
+    function deleteConfirmation(id) {
+        swal({
+            title: "Delete?",
+            text: "Please ensure and then confirm!",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: !0
+        }).then(function(e) {
+
+            if (e.value === true) {
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                window.location.href = "{{url('Client/deletePerson/')}}/" + id
+
+            } else {
+                swal({
+                    title: "Cancelled",
+                    text: "Your Records are safe :)",
+                    type: "error",
+                    confirmButtonClass: "btn-danger"
+                });
+            }
+
+        }, function(dismiss) {
+            return false;
+        })
+    }
+</script>
 <script>
     $(document).on('click', '.removercd', function() {
         alert('hello');

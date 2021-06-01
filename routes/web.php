@@ -43,6 +43,7 @@ Route::group(['prefix' => 'Client'], function () {
     Route::get('/addContactPerson/{id}/{subid}', ['uses' => 'ClientController@addContactPerson']);
     Route::post('/insertPerson', 'ClientController@insertPerson');
     Route::get('/destroy/{id}', 'ClientController@destroy');
+    Route::get('/deletePerson/{id}', 'ClientController@deletePerson');
 });
 
     Route::group(['prefix'=>'Project-List'],function(){

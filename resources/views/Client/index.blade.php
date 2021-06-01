@@ -31,7 +31,6 @@
                                         <th>#</th>
                                         <th>Company Name</th>
                                         <th>Email</th>
-                                        <th>Contact Person</th>
                                         <th>Address</th>
                                         <th>Action</th>
                                     </tr>
@@ -42,11 +41,6 @@
                                             <td><?= $i++ ?></td>
                                             <td><?= $post->company_name ?></td>
                                             <td><?= $post->company_email ?></td>
-                                            <td><?php foreach ($persondata as $data) {
-                                                    if ($post->id == $data->client_id) {
-                                                        echo $data->name;
-                                                    }
-                                                } ?></td>
                                             <td><?= $post->company_address ?></td>
                                             <td>
                                                     <a href='<?= url('Client/add/' . $post->id) ?>'><span class='btn btn-primary btn-xs'>
