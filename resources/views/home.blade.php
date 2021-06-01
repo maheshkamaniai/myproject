@@ -6,10 +6,8 @@
     @include('layouts.sidebar')
 
     <div class="page">
-        <div id="page_top" class="section-body top_dark">
             @include('layouts.tophead')
 
-        </div>
         <div class="section-body mt-3">
             <div class="container-fluid">
                 <div class="row clearfix">

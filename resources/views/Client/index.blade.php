@@ -20,7 +20,7 @@
                                         <div class="card-options ">
                                    
 
-                                        <a class="pull-right"  href="{{url('Client/add')}}"><i class="btn btn-primary"> Add New</i></a>
+                                        <a class="btn btn-primary pull-right"  href="{{url('Client/add')}}" >Add New</a>
                                             
                                         </div>
                                     </div>
@@ -71,30 +71,9 @@
                     </div>
                 </div>
             </div>
-            <div class="section-body">
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <a href="templateshub.net">Templates Hub</a>
-                            </div>
-                            <div class="col-md-6 col-sm-12 text-md-right">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item"><a href="doc/index.php">Documentation</a></li>
-                                    <li class="list-inline-item"><a href="javascript:void(0)">FAQ</a></li>
-                                    <li class="list-inline-item"><a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">Buy Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
+            
         </div>
-        <?php
-    // $(document).on("click","#test-element",function() {
-    //     alert("click bound to document listening for #test-element");
-    // });
-    ?>
+      
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
     <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">

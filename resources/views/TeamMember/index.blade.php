@@ -6,11 +6,7 @@
   // print_r($TeamMembe);exit;
   ?>
 <div class="page">
-  <div id="page_top" class="section-body top_dark">
-    <div class="container-fluid">
       @include('layouts.tophead')
-    </div>
-  </div>
   <div class="section-body mt-3">
     <div class="container-fluid">
       <div class="row clearfix">

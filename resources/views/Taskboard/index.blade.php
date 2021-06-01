@@ -2,11 +2,10 @@
 @extends('layouts.app')
 @section('content')
 <?php $page='Taskboard'; ?>
-    <div id="main_content">
         @include('layouts.sidebar')
         <div class="page">
             @include('layouts.tophead')
-            <div class="section-body">
+            <div class="section-body mt-3">
                 <div class="container-fluid">
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="list" role="tabpanel">
@@ -34,7 +33,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
     <div class="section-body">
