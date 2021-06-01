@@ -32,7 +32,6 @@
                     <div class="col-md-12">
                         <div class="d-flex justify-content-between align-items-center">
                             <ul class="nav nav-tabs page-header-tab">
-                                <li class="nav-item"><a class="nav-link" href="add_project.php"><i class="fa fa-plus"></i> Add project</a></li>
                                 <li class="nav-item"><a class="nav-link active" href="<?= url('Project-List/modulelist/' . $projectid) ?>"><i class="fa fa-plus"></i> Module List</a></li>
                             </ul>
                             <div class="header-action d-md-flex">

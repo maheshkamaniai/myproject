@@ -82,7 +82,12 @@ class ProjectListController extends Controller
             $this->projectlist->updateModule($request);
         }
         else{
-            $this->projectlist->insertModule($request);
+            if($this->projectlist->insertModule($request))
+            {
+                $request->session()->flash('success_msg', 'Module Added Successfully');
+            }else{
+                $request->session()->flash('error_msg', 'Failed To Add Module');
+            }
         }
         return redirect('Project-List/modulelist/'.$projectid);
     }

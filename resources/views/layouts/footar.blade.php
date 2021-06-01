@@ -16,5 +16,69 @@
 
 
 <script src="{{ asset('assets/js/form/dropify.js') }}" defer></script>
+<script src="{{asset('assets/plugins/pnotify/pnotify.js')}}"></script>
+
+<script>         
+function alertbox(title="",error="",type="")
+{
+    swal({
+        title: title,
+        text: error,
+        type: type,
+        showCancelButton: false,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "ok",
+        closeOnConfirm: false
+    });
+}
+</script>
+
+<?php
+    if (request()->session()->get('error_msg')!=""):
+        $msg =  request()->session()->get('error_msg');
+        //request()->session()->flash('error_msg',"");
+        echo '  <script>
+                    swal({
+                        title: "Error",
+                        text: "'.$msg.'",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "ok",
+                        closeOnConfirm: false
+                    });
+                </script>';
+    endif;
+    if (request()->session()->get('success_msg')!=""):
+        $msg =  request()->session()->get('success_msg');
+        //request()->session()->flash('success_msg',"");
+            echo '  <script>
+                        swal({
+                            title: "Success",
+                            text: "'.$msg.'",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "ok",
+                            closeOnConfirm: false
+                        });
+            </script>';
+    endif;
+    if (request()->session()->get('info_msg')!=""):
+        $msg =  request()->session()->get('info_msg');
+        //$request()->session->flash('info_msg',"");
+        echo '<script>
+                swal({
+                    title: "Info",
+                    text: "'.$msg.'",
+                    type: "info",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-info",
+                    confirmButtonText: "ok",
+                    closeOnConfirm: false
+                });
+          </script>';
+    endif;
+?>
 
 

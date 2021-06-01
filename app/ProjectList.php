@@ -118,12 +118,13 @@ class ProjectList extends Model
             $document_name.=$docName.',';
         }
         }
-        DB::table('tbl_project_module')->insert([
+        $module=DB::table('tbl_project_module')->insert([
             'project_id'=>$projectid,
             'module_name'=>$modulename,
             'module_description'=>$module_desc,
             'module_document'=>$document_name
         ]);
+        return $module;
     }
     public function updateModule(Request $request)
     {
@@ -142,12 +143,13 @@ class ProjectList extends Model
             $document_name.=$docName.',';
         }
         }
-        DB::table('tbl_project_module')->where('id',$request->id)->update([
+        $module=DB::table('tbl_project_module')->where('id',$request->id)->update([
             'project_id'=>$projectid,
             'module_name'=>$modulename,
             'module_description'=>$module_desc,
             'module_document'=>$document_name
         ]);
+        return $module;
     }
     public function insertTask(Request $request)
     {
@@ -155,12 +157,13 @@ class ProjectList extends Model
         $title=$request->task_name;
         $sdate=$request->sdate;
         $edate=$request->edate;
-        DB::table('tbl_project_task')->insert([
+        $task=DB::table('tbl_project_task')->insertGetId([
             'module_id'=>$moduleid,
             'title'=>$title,
             'sdate'=>$sdate,
             'edate'=>$edate
         ]);
+        return $task;
     }
     public function updateTask(Request $request)
     {
@@ -169,10 +172,11 @@ class ProjectList extends Model
         $sdate=$request->sdate;
         $edate=$request->edate;
         $id=$request->id;
-        DB::table('tbl_project_task')->where('id',$id)->update([
+        $task=DB::table('tbl_project_task')->where('id',$id)->update([
             'title'=>$title,
             'sdate'=>$sdate,
             'edate'=>$edate
         ]);
+        return $task;
     }
 }
