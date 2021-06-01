@@ -51,6 +51,7 @@ class RegisterController extends Controller
     $data['profile']->move(public_path('images'),$filename);
     $user = User::create([
         'name' => $data['name'],
+        'roal' => $data['roal'],
         'email' => $data['email'],
         'password' => Hash::make($data['password']),
         'image' =>  $filename

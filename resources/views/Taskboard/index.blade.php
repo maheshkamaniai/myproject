@@ -17,7 +17,8 @@
                                 <div class="card">
                                     <a href="{{ URL('Taskboard/addmodule/'. $post->id) }}">
                                         <div class="card-body text-center ribbon">
-                                            <img class="rounded-circle img-thumbnail w100" style='width:90px' src="../upload/{{ $post->project_logo}}" alt="">
+                                            <img class="rounded-circle img-thumbnail w100" style='width: 90px;
+                                            height: 86px;' src="../upload/{{ $post->project_logo}}" alt="">
                                             <h6 class="mt-3 mb-0">{{ $post->project_title }}</h6>
                                         
                                         </div>
