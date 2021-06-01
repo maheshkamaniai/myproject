@@ -40,10 +40,21 @@ class TeamMemberController extends Controller
         if($id!='')
         {
            
-            $this->TeamMembe->updateProject($request);
+            if($this->TeamMembe->updateProject($request))
+            {
+            request()->session()->flash('success_msg', 'Team Member Updated Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Update Team Member');
+            }
         }
         else{
-            $projectid=$this->TeamMembe->insert($request);
+            if($this->TeamMembe->insert($request))
+            {
+                
+            request()->session()->flash('success_msg', 'Team Member Added Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Add Team Member');
+            }
         }
        
        return redirect('Team-Member/');
@@ -51,7 +62,12 @@ class TeamMemberController extends Controller
     
     public function delete($id)
     {
-        DB::table('tbl_teammember')->where('id', $id)->update(['isdelete' => "1"]);
+        $team=DB::table('tbl_teammember')->where('id', $id)->update(['isdelete' => "1"]);
+        if($team!=''){
+        request()->session()->flash('success_msg', 'Team Member Deleted Successfully');
+    }else{
+        request()->session()->flash('error_msg', 'Failed To Delete Team Member');
+        }
         return redirect()->back();
     }
  

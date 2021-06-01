@@ -41,15 +41,24 @@ class ClientController extends Controller
     {
         $pid=$request->id;
         if($pid!=''){
-            $this->client->updateRecord($request);
-            $message='Client updated Successfully';
+            if($this->client->updateRecord($request)){    
+            request()->session()->flash('success_msg', 'Client Updated Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Update Client');
+            
+            }
         }
        else{
         $pid=$this->client->insert($request);
-        $message='Client Added Successfully';
-
+        if($pid!='')
+        {
+            request()->session()->flash('success_msg', 'Client Added Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Add Client');
+            
+            }
        }
-      return redirect('Client/addContactPerson/'.$pid)->with($message);
+      return redirect('Client/addContactPerson/'.$pid);
         //  }
         // else{
         //     $message="Client Allready Exists";
@@ -72,12 +81,26 @@ class ClientController extends Controller
         $id=$request->id;
         if($subid!='')
         {
-            $this->client->updatePerson($request);
+            if($this->client->updatePerson($request))
+            {
+                request()->session()->flash('success_msg', 'Contact Person Updated Successfully');
+            }else{
+                request()->session()->flash('error_msg', 'Failed To Update Contact Person');
+                
+                }   
+            
             return redirect('Client/addContactPerson/'.$id);   
            
         }
         else{
-            $this->client->insertPerson($request);
+            if($this->client->insertPerson($request))
+            {
+                
+                request()->session()->flash('success_msg', 'Contact Person Added Successfully');
+            }else{
+                request()->session()->flash('error_msg', 'Failed To Add Contact Person');
+                
+                }   
             return redirect()->back();
         }
       
@@ -111,11 +134,28 @@ class ClientController extends Controller
     public function destroy($id)
     {
  
-     DB::table('tbl_client')
+     $client=DB::table('tbl_client')
             ->where('id', $id)
             ->update(['isdelete' => "1"]);
-   
+        if($client!=''){
+            request()->session()->flash('success_msg', 'Client Deleted Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Delete Client');
+        }   
         return redirect()->back();
     }
 
+    
+    public function deletePerson($id)
+    {
+     $client=DB::table('tbl_client_person')
+            ->where('id', $id)
+            ->update(['isdelete' => "1"]);
+        if($client!=''){
+            request()->session()->flash('success_msg', 'Contect Person Deleted Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Delete Contect Person');
+        }   
+        return redirect()->back();
+    }
 }

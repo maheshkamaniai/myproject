@@ -53,7 +53,12 @@ class TaskboardController extends Controller
     {
         $id = $request->pid;
         $taskid = $this->Taskboard->inserttask($request);
-        $message = 'Project List Added Successfully';
+        if($taskid!='')
+        {
+            request()->session()->flash('success_msg', 'Module Added Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Add Module');
+        }
         return redirect('Taskboard/addmodule/' . $id)->with($message);
     }
 
@@ -73,7 +78,12 @@ class TaskboardController extends Controller
             'taskname'=>$taskname,
             'mid'=>$mid
             ]);   
-
+            if($taskid!='')
+            {
+                request()->session()->flash('success_msg', 'Task Added Successfully');
+            }else{
+                request()->session()->flash('error_msg', 'Failed To Add Task');
+            }
         return redirect()->back();
     }
     public function updateTask(Request $request)

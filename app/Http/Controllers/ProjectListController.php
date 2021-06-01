@@ -52,11 +52,22 @@ class ProjectListController extends Controller
         $id=$request->id;
         if($id!='')
         {
-            $this->projectlist->updateProject($request);
+            if($this->projectlist->updateProject($request))
+            {
+                $request->session()->flash('success_msg', 'Project Updated Successfully');
+            }else{
+                $request->session()->flash('error_msg', 'Failed To Update Project');
+            }
             $projectid=$id;
         }
         else{
             $projectid=$this->projectlist->insert($request);
+            if($projectid!='')
+            {
+                $request->session()->flash('success_msg', 'Project Added Successfully');
+            }else{
+                $request->session()->flash('error_msg', 'Failed To Add Project');
+            }
         }
        
        return redirect('Project-List/modulelist/'.$projectid);
@@ -79,7 +90,12 @@ class ProjectListController extends Controller
         $projectid=$request->projectid;
         if($id!='')
         {
-            $this->projectlist->updateModule($request);
+            if($this->projectlist->updateModule($request))
+            {
+                $request->session()->flash('success_msg', 'Module Updated Successfully');
+            }else{
+                $request->session()->flash('error_msg', 'Failed To Update Module');
+            }
         }
         else{
             if($this->projectlist->insertModule($request))
@@ -110,37 +126,64 @@ class ProjectListController extends Controller
         $moduleid=$request->moduleid;
         if($id!='')
         {
-            $this->projectlist->updateTask($request);
+            if($this->projectlist->updateTask($request))
+            {
+                $request->session()->flash('success_msg', 'Task Updated Successfully');
+            }else{
+                $request->session()->flash('error_msg', 'Failed To Update Task');
+            }
+
         }
         else{
-            $this->projectlist->insertTask($request);
+            if($this->projectlist->insertTask($request))
+            {
+                $request->session()->flash('success_msg', 'Task Added Successfully');
+            }else{
+                $request->session()->flash('error_msg', 'Failed To Add Task');
+            }
+            
         }
         return redirect('Project-List/tasklist/'.$moduleid);
     }
 
     public function deleteProject($id)
     {
-        
-        DB::table('tbl_project')
+        $prj=DB::table('tbl_project')
         ->where('id', $id)
         ->update(['isdelete' => "1"]);
+        if($prj!='')
+        {
+            request()->session()->flash('success_msg', 'Project Deleted Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Delete Project');
+        }
 
         return redirect()->back();
     }
     public function deleteModule($id)
     {
-        DB::table('tbl_project_module')
+        $prj=DB::table('tbl_project_module')
         ->where('id', $id)
         ->update(['isdelete' => "1"]);
-   
+        if($prj!='')
+        {
+            request()->session()->flash('success_msg', 'Module Deleted Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Delete Module');
+        }
         return redirect()->back();
     }
     public function deleteTask($id)
     {
-        DB::table('tbl_project_task')
+        $prj=DB::table('tbl_project_task')
         ->where('id', $id)
         ->update(['isdelete' => "1"]);
-   
+        if($prj!='')
+        {
+            request()->session()->flash('success_msg', 'Task Deleted Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Delete Task');
+        }
         return redirect()->back();
     }
 
@@ -207,6 +250,12 @@ class ProjectListController extends Controller
                     ]);   
             }
             }
+        if($projectid!='')
+        {
+            request()->session()->flash('success_msg', 'Project Add To TaskBoard Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Add Project To TaskBoard');
+        }
          return redirect()->back();
     }
   

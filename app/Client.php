@@ -38,6 +38,7 @@ class Client extends Model
                 'company_address'=>$company_address,
                 'updated_by'=>Auth::user()->id,
             ]);
+            return $clientid;
     }
     public function insertPerson(Request $request)
     {
@@ -51,13 +52,14 @@ class Client extends Model
                 'status'=>1
             ]);
         }
-        DB::table('tbl_client_person')->insert([
+        $personid=DB::table('tbl_client_person')->insert([
             'client_id'=>$clientid,
             'name'=>$name,
             'email'=>$email,
             'mobile'=>$number,
             'status'=>$status,
         ]);
+        return $personid;
     }
     public function updatePerson(Request $request)
     {
@@ -72,14 +74,14 @@ class Client extends Model
                 'status'=>1
             ]);
         }
-        DB::table('tbl_client_person')->where('id',$subid)->update([
+        $personid=DB::table('tbl_client_person')->where('id',$subid)->update([
             
             'name'=>$name,
             'email'=>$email,
             'mobile'=>$number,
             'status'=>$status,
         ]);
-
+            return $personid;
     }
     public function getClientData()
     {

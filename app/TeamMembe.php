@@ -22,7 +22,7 @@ class TeamMembe extends Model
        $email=$request->email;
        $Roal=$request->Roal;
 
-      $projectid=DB::table('tbl_teammember')->insert([
+      $memberid=DB::table('tbl_teammember')->insert([
          'name'=>$name,
          'dob'=>$dob,
          'gender'=>$gender,
@@ -32,6 +32,7 @@ class TeamMembe extends Model
          'Roal'=> $Roal,
          'created_by'=>Auth::user()->id,
       ]);   
+      return $memberid;
       
    }
    public function updateProject(Request $request)
@@ -67,35 +68,12 @@ class TeamMembe extends Model
          // 'img'=> $filename,
          'created_by'=>Auth::user()->id,
       ]);
+      return $clientid
    }
     public function getTeamMembeData()
     {
       $TeamMembe=DB::table('tbl_teammember')->where('isdelete',0)->get();
       return $TeamMembe;
     }
-   //  public function getModuleData()
-   //  {
-   //    $moduledata=DB::table('tbl_module')->where('isdelete',0)->get();
-   //    return $moduledata;
-   //  }
-
-   //  public function inserttask(Request $request)
-   // {
-   //    // exit;
-   //    $task=$request->task;
-   //    $taskid=DB::table('tbl_tasklist')->insertGetId([
-   //       'task'=>$task,
-   //       'module'=>Auth::user()->id,
-   //    ]);   
-   //    // echo $taskid;exit;
-   //     return $taskid;
-   // }
-   // public function gettaskData()
-   // {
-   //   $taskData=DB::table('tbl_tasklist')->get();
-   
-   //   return $taskData;
-   // }
-   
 
 }

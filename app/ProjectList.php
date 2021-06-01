@@ -88,7 +88,7 @@ class ProjectList extends Model
             $document_name.=$docName.',';
         }
         }
-        DB::table('tbl_project')->where('id',$request->id)->update([
+        $project=DB::table('tbl_project')->where('id',$request->id)->update([
             'project_title'=>$project_title,
             'technology_used'=>$technology,
             'team_member_id'=>$team_member,
@@ -100,6 +100,7 @@ class ProjectList extends Model
             'project_logo'=>$fileName,
             'project_document'=>$document_name,
         ]);
+        return $project;
     }
     public function insertModule(Request $request)
     {
