@@ -5,23 +5,17 @@
 <?php
 
 $val_name = '';
-$val_dob = '';
-$val_gender = '';
-$val_phone = '';
 $val_email = '';
-$val_img = '';
-$val_id = '';
-$val_Roal = '';
-// if ($id != '') {
-//     $val_name = $data->name;
-//     $val_email = $data->email;
-//     $val_dob = $data->dob;
-//     $val_phone = $data->phone;
-//     $val_img = $data->img;
-//     $val_gender = $data->gender;
-//     $val_id = $data->id;
-//     $val_Roal = $data->Roal;
-// }
+$val_roal="";
+$val_image="";
+$val_id ="";
+if ($id != '') {
+    $val_name = $data->name;
+    $val_email = $data->email;
+    $val_id = $data->id;
+    $val_roal = $data->roal;
+    $val_image = $data->image;
+}
 ?>
 
 <div class="page">
@@ -54,18 +48,16 @@ $val_Roal = '';
                   <h3 class="card-title">Add User</h3>
                 </div>
 
-
-
-                
                 <form class="card-body" enctype="multipart/form-data" method="post" action="{{ url('user/save') }}"
                >
                   <div class="row ">
                     <div class="col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Name</label>
+                        <input type="hidden" name="id" value="<?=$val_id?>">
                         <input id="name" type="text"
                         class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
-                        value="{{ old('name') }}" required autofocus>
+                        value="{{ old('name') }} <?=$val_name?>" required autofocus>
                             @if ($errors->has('name'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -79,7 +71,7 @@ $val_Roal = '';
                         <label>Email</label>
                                 <input id="email" type="email"
                                 class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
-                                value="{{ old('email') }}" required>
+                                value="{{ old('email') }}<?=$val_email?>" required>
 
                                 @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
@@ -92,7 +84,7 @@ $val_Roal = '';
                     <div class="col-md-4 col-sm-12">
                             <label class="form-label">Password</label>
                             <input id="password" type="password"
-                                class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
+                                class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="<?=$val_email?>"
                                 required>
 
                             @if ($errors->has('password'))
@@ -102,36 +94,35 @@ $val_Roal = '';
                             @endif
                     </div>
 
-                    <div class="col-md-4 col-sm-12">
-                        <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
-                        <input id="password-confirm" type="password" class="form-control"
-                            name="password_confirmation" required>
-                    </div>
+                  
 
 
                     <div class="col-md-4 col-sm-12">
-                        <?php $val_Roal=""; ?>
+              
                         <label for="password-confirm" class="form-label">Role </label>
                         <select class="form-control show-tick" name="roal">
                             <option value="">-- Roal --</option>
-                            <option value="0" @if($val_Roal==1) selected @endif>Admin</option>
-                            <option value="1" @if($val_Roal==0) selected @endif>Developer</option>
+                            <option value="0" @if($val_roal==1) selected @endif>Admin</option>
+                            <option value="1" @if($val_roal==0) selected @endif>Developer</option>
                         </select>
                     </div>
                  
                     <div class="col-md-12 col-sm-12">
                       <div class="form-group">
                         <label>Profile</label>
-                        <input type="file" name="profile" accept="image/png, image/gif, image/jpeg" class="form-control">
+                        <input type="file" name="profile" type='file' id="imgInp" accept="image/png, image/gif, image/jpeg" class="form-control">
                       </div>
                     </div>
+                  <?php  if($val_image!=''){
+                    ?>
+
                   
-                    {{-- <div class="col-md-4 col-sm-12">
-                      <div class="form-group">
-                        <label>Enter Your Profile</label>
-                        <input type="file" name="pimage" accept="image/png, image/gif, image/jpeg" class="form-control" />
-                      </div>
-                    </div> --}}
+                    <div class="col-md-6 col-sm-12">
+                      <img id="blah" class="rounded-circle img-thumbnail w100" src="{{url( '/profile/'.$val_image)}}" alt="" style="width: 150px; height: 150px;">
+                      <h6 class="mt-3 mb-0"></h6>
+                      <!-- <span>jason-porter@info.com</span> -->
+                  </div>
+<?php } ?>
                     <div class="col-sm-12">
                        
                                 <button type="submit" class="btn btn-primary">
@@ -170,5 +161,14 @@ $val_Roal = '';
          $(function () {
              $('#datetimepicker1').datetimepicker();
          });
+      </script>
+      
+      <script>
+        imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+          blah.src = URL.createObjectURL(file)
+        }
+      }
       </script>
 @endsection

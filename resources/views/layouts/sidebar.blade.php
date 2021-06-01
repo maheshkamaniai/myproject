@@ -24,19 +24,19 @@ $sub2 = Request::segment(3);
                 </ul>
             </li>
             <li class="<?php  if($master=='Taskboard'){ echo 'active'; } ?>"><a href="{{url('Taskboard')}}"><i class="fa fa-calendar-check-o"></i><span>Taskboard</span></a></li>
-            <li class="<?php  if($master=='Team-Member'){ echo 'active'; } ?>"><a href="{{url('Team-Member')}}"><i class="fa fa-user"></i><span>Team Member</span></a></li>
+            <li class="<?php  if($master=='Team-Member'){ echo 'active'; } ?>"><a href="{{url('Team-Member')}}"><i class="fa fa-users"></i><span>Team Member</span></a></li>
             <li class="<?php  if($master=='Client'){ echo 'active'; } ?>"><a href="{{url('Client')}}"><i class="fa fa-user"></i><span>Client</span></a></li>
 
 
-            {{-- class="active"
-                <li>
+            {{-- class="active" --}}
+                <li class="<?php  if($master=='user'){ echo 'active'; } ?>">
                 <a href="javascript:void(0)" class="has-arrow arrow-c"><i class="fa fa-lock"></i><span>HRMS</span></a>
                 <ul>
-                    <li><a href="login.php">User</a></li>
-                    <li><a href="{{url('UserRole')}}">User Role</a></li>
+                    <li class="<?php  if($master=='user'){ echo 'active'; } ?>"><a href="{{ url('user/')}}">User</a></li>
+                    {{-- <li><a href="{{url('UserRole')}}">User Role</a></li> --}}
 
                 </ul>
-            </li> --}}
+            </li>
             <!-- <li>
                 <a href="javascript:void(0)" class="has-arrow arrow-c"><i
                         class="fa fa-lock"></i><span>Authentication</span></a>

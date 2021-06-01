@@ -17,7 +17,9 @@ Route::get('/', 'IndexController@index');
 Route::group(['prefix' => 'user'], function () {
     Route::get('/','UserController@index');
     Route::get('/add','UserController@add');
+    Route::get('/add/{id}','UserController@add');
     Route::post('/save','UserController@save');
+    Route::get('/delete/{id}','UserController@delete');
 });
 
 // Route::get('/',function(){

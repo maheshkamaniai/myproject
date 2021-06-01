@@ -10,25 +10,32 @@ class Users extends Model
 {
    public function insert(Request $request)
    {
-
+$filename='';
+    if($request->profile!=''){
     $filename = time() . '.' . $request->profile->extension();
 
     $request->profile->move(public_path('profile'),$filename);
-     
+    }
        $name=$request->name;
        $email =$request->email ;
-       $password=$request->password;
+       $password=bcrypt($request->password);
        $roal=$request->roal;
 
-      $projectid=DB::table('tbl_teammember')->insert([
+       $datetime=date('Y-m-d H:i:s');
+
+
+      $userid=DB::table('users')->insert([
          'name'=>$name,
          'email'=>$email,
          'password'=>$password,
          'image'=> $filename,
          'roal'=> $roal,
+         'isdelete'=>0,
          'created_by'=>Auth::user()->id,
+         'created_at'=>$datetime,
+         'updated_at'=>$datetime
       ]);   
-      
+      return $userid;
    }
    public function updateProject(Request $request)
    {
@@ -37,38 +44,48 @@ class Users extends Model
       // $request->profile->move(public_path('profile'),$filename);
 
       $name=$request->name;
-      $dob=$request->dob;
-      $gender=$request->gender;
-      $phone=$request->phone;
-      $email=$request->email;
-      $Roal=$request->Roal;
+      $email =$request->email ;
+      $password=$request->password;
+      $roal=$request->roal;
+
+      $datetime=date('Y-m-d H:i:s');
       $id=$request->id;
     
-      
-
       if($request->profile!=""){
          $filename = time() . '.' . $request->profile->extension();
          $request->profile->move(public_path('profile'),$filename);
-            $clientid=DB::table('tbl_teammember')->where('id',$id)->update([
-               'img'=> $filename,
+            $clientid=DB::table('users')->where('id',$id)->update([
+                'image'=> $filename,
             ]);
       }
-      $clientid=DB::table('tbl_teammember')->where('id',$id)->update([
-         'name'=>$name,
-         'dob'=>$dob,
-         'gender'=>$gender,
-         'phone'=>$phone,
-         'email'=>$email,
-         'Roal'=>$Roal,
+
+      if($request->password!=""){
+           $clientid=DB::table('users')->where('id',$id)->update([
+            'password'=>$password,
+           ]);
+     }
+
+      $userid=DB::table('users')->where('id',$id)->update([
+        'name'=>$name,
+        'email'=>$email,
+       
+        
+        'roal'=> $roal,
+        'isdelete'=>0,
+        'created_by'=>Auth::user()->id,
+        'created_at'=>$datetime,
+        'updated_at'=>$datetime
+       
          // 'img'=> $filename,
-         'created_by'=>Auth::user()->id,
       ]);
+      return $userid;
    }
-    public function getTeamMembeData()
-    {
-      $TeamMembe=DB::table('tbl_teammember')->where('isdelete',0)->get();
-      return $TeamMembe;
-    }
+   
+   public function getUsersData()
+   {
+     $UsersData=DB::table('users')->where('isdelete',0)->get();
+     return $UsersData;
+   }
 
    
 

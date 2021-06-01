@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<?php $page = 'Client'; ?>
+<?php $page = 'User'; ?>
 @include('layouts.sidebar')
 <div class="page">
     @include('layouts.tophead')
@@ -29,27 +29,19 @@
                                 <table class='table'>
                                     <tr class='thead-dark'>
                                         <th>#</th>
-                                        <th>Company Name</th>
+                                        <th>User Name</th>
                                         <th>Email</th>
-                                        <th>Contact Person</th>
-                                        <th>Address</th>
                                         <th>Action</th>
                                     </tr>
-                                    <?php /*
+                                    <?php 
                                     $i = 1;
-                                    foreach ($clientdata as $post) {  ?>
+                                    foreach ($UsersData as $post) {  ?>
                                         <tr>
                                             <td><?= $i++ ?></td>
-                                            <td><?= $post->company_name ?></td>
-                                            <td><?= $post->company_email ?></td>
-                                            <td><?php foreach ($persondata as $data) {
-                                                    if ($post->id == $data->client_id) {
-                                                        echo $data->name;
-                                                    }
-                                                } ?></td>
-                                            <td><?= $post->company_address ?></td>
+                                            <td><?= $post->name ?></td>
+                                            <td><?= $post->email ?></td>
                                             <td>
-                                                    <a href='<?= url('Client/add/' . $post->id) ?>'><span class='btn btn-primary btn-xs'>
+                                                    <a href='<?= url('user/add/' . $post->id) ?>'><span class='btn btn-primary btn-xs'>
                                                         <i class='fa fa-pencil'></i></span>
                                                     </a>
                                                     <a class="remove-user" data-id="{{ $post->id }}" data-action="#" onclick="deleteConfirmation({{$post->id}})"><span class='btn btn-danger btn-xs'> <i class='fa fa-trash'></i></span></a>
@@ -58,7 +50,7 @@
 
                                             </td>
                                         </tr>
-                                    <?php } */
+                                    <?php } 
                                     ?>
                                 </table>
 
@@ -92,7 +84,7 @@
             if (e.value === true) {
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-                window.location.href = "{{url('Client/destroy/')}}/" + id
+                window.location.href = "{{url('user/delete/')}}/" + id
 
             } else {
                 swal({

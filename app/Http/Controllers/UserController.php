@@ -16,19 +16,19 @@ class UserController extends Controller
 
     public function index()
     {
-        // $Users=$this->Users->getUsersData();
-        return view('user.index');
+        $UsersData=$this->Users->getUsersData();
+        return view('user.index',['UsersData'=>$UsersData]);
     }
     public function add(Request $request)
     {
     
-        // $id=$request->id;
-        // $data='';
-        // if($id!='')
-        // {
-        //     $data=DB::table('tbl_Usersr')->where('isdelete',0)->where('id',$id)->get()->first();
-        // }
-        return view('user.add');
+        $id=$request->id;
+        $data='';
+        if($id!='')
+        {
+            $data=DB::table('Users')->where('isdelete',0)->where('id',$id)->get()->first();
+        }
+        return view('user.add',['data'=>$data,'id'=>$id]);
         // return view('Usersr/add');
     }
     public function save(Request $request)
@@ -38,18 +38,38 @@ class UserController extends Controller
         if($id!='')
         {
            
-            $this->Users->updateProject($request);
+            if($this->Users->updateProject($request))
+            {
+                $request->session()->flash('success_msg', 'User Updated Successfully');
+            }else{
+                $request->session()->flash('error_msg', 'Failed To Update User');
+            }
+
+
         }
         else{
-            $projectid=$this->Users->insert($request);
+            if($this->Users->insert($request))
+            {
+                $request->session()->flash('success_msg', 'User Added Successfully');
+            }else{
+                $request->session()->flash('error_msg', 'Failed To Add User');
+            }
+
         }
        
-       return redirect('Team-Member/');
+       return redirect('user/');
     }
     
     public function delete($id)
     {
-        DB::table('tbl_Usersr')->where('id', $id)->update(['isdelete' => "1"]);
+        $user=DB::table('Users')->where('id', $id)->update(['isdelete' => "1"]);
+        if($user!='')
+        {
+            request()->session()->flash('success_msg', 'User Deleted Successfully');
+        }else{
+            request()->session()->flash('error_msg', 'Failed To Delete User');
+        }
+
         return redirect()->back();
     }
  
